@@ -5,7 +5,7 @@
 <meta name="keywords" content="HTML5, tags"/>
 <title>Manage module</title>
 <link href="style/style.css" rel="stylesheet" type="text/css" />
-<?php include("header.php");?>
+<?php include("include/header.php");?>
 </head>
 
 <script>
