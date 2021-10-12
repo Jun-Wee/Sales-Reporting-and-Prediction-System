@@ -23,10 +23,29 @@ body{
   color: black;
 }
 
-#edit_table,td{
-	border: 1px solid black;
+#edit_table, td {
+  border: 1px solid black;
+  text-align: center;
 }
 
 td{
-	width:200px;
+	width:100px;
+}
+
+section{
+  float: left;
+  padding: 3%;
+  width:45%;
+}
+
+aside{
+  float: right;
+  width: 25%;
+  margin-top: 55px;
+  padding-left: 15px;
+  margin-right: 50px;
+}
+
+label,input,select{
+  margin: 15px;
 }
