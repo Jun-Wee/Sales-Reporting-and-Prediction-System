@@ -46,6 +46,12 @@ aside{
   margin-right: 50px;
 }
 
-label,input,select{
-  margin: 15px;
+form div{
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+label{
+  width: 90px;
 }
