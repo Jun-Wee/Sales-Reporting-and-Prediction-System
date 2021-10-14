@@ -1,7 +1,12 @@
 body{
 	margin:0;
 	padding:0;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
 }
+
+/* navigation section */
 
 .navigationbar {
   background-color: #333;
@@ -121,4 +126,73 @@ p.para1 {
   padding-right: 100px;
   padding-left: 700px;
   padding-top: 15px;
+}
+
+/* footer section */
+.footer{
+  position: absolute;
+  background-color: #333;
+  padding: 70px 0;
+  bottom: 0;
+}
+
+
+.footer-bottom {
+  color: white;
+  text-align: center;
+}
+
+.footer-column{
+  width: 25%;
+  padding: 0 15px;
+}
+
+.footer-column h4{
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-column h4::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  background-color: red;
+  height: 2px;
+  box-sizing: border-box;
+  width: 60px;
+}
+
+.container{
+  max-width: 1500px;
+  margin: auto;
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer,ul{
+  list-style: none;
+  padding: 0px;
+  margin-top: -12px;
+}
+
+.footer-column li{
+  padding: 5px;
+}
+
+.footer-column a{
+  text-decoration: none;
+  color: white;
+}
+
+.footer-column ul li a:hover{
+  padding-left: 10px;
+  color: aqua;
 }

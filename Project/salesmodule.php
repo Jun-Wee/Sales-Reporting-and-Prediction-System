@@ -106,6 +106,8 @@ function myFunction() {
       </form>
     </div>
   </aside>
+
+  <?php include("include/footer.php");?>
 </body>
 </html>
 
