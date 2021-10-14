@@ -96,7 +96,7 @@ label{
   padding: 10px;
 }
 
-input[type=text], input[type=password] {
+#username[type=text], #password[type=password] {
   width: 10%;
   padding: 10px 20px;
   margin: 8px 0;
@@ -111,7 +111,7 @@ input[type=text], input[type=password] {
   background-size:cover;
 }
 
-h1.para1 {
+.para1 {
   font-family: verdana;
   font-size: 45px;
   text-align: right;
@@ -119,7 +119,7 @@ h1.para1 {
   padding-top: 15px;
 }
 
-p.para1 {
+.para2 {
   font-family: verdana;
   font-size: 20px;
   text-align: left;
@@ -130,12 +130,11 @@ p.para1 {
 
 /* footer section */
 .footer{
-  position: absolute;
+  position: fixed;
   background-color: #333;
-  padding: 70px 0;
   bottom: 0;
+  width: 100%;
 }
-
 
 .footer-bottom {
   color: white;
@@ -143,8 +142,9 @@ p.para1 {
 }
 
 .footer-column{
-  width: 25%;
+  width: 10%;
   padding: 0 15px;
+  margin:0;
 }
 
 .footer-column h4{
@@ -167,11 +167,6 @@ p.para1 {
   width: 60px;
 }
 
-.container{
-  max-width: 1500px;
-  margin: auto;
-}
-
 .row{
   display: flex;
   flex-wrap: wrap;
@@ -183,16 +178,16 @@ p.para1 {
   margin-top: -12px;
 }
 
-.footer-column li{
-  padding: 5px;
-}
-
 .footer-column a{
   text-decoration: none;
   color: white;
 }
 
-.footer-column ul li a:hover{
+.footer-column li a:hover{
   padding-left: 10px;
   color: aqua;
+}
+
+.footer-column li{
+  padding:5px;
 }

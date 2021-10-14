@@ -29,7 +29,6 @@ function checkTime(i) {
 <!-- login form -->
 <form id="loginForm" method="post" action="login_process.php">
     <h2>Login</h2>
-    <p>
       <label for="username">Username&#58;</label>
       <input id="username" type="text" name="usrName" value="admin" />
     </p>

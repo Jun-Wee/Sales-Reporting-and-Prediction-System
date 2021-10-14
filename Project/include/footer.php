@@ -19,7 +19,6 @@
                     <li><a href="">User Manual</a></li>
                 </ul>
             </div>
-            
         </div>
     </div>
     <div class="footer-bottom">
