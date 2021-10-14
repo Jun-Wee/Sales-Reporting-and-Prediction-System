@@ -59,24 +59,24 @@ function myFunction() {
             <label for="cat">Product: </label>
             <select id="cat" name="cat">
               <optgroup label="Health">
-                <option value="Health,vitamins">Vitamins</option>
-                <option value="Health,firstaid">First Aid</option>
-                <option value="Health,facemask">Face Masks & Gloves</option>
-                <option value="Health,eye&earcare">Eye & Ear Care</option>
+                <option value="1,1">Vitamins</option>
+                <option value="1,2">First Aid</option>
+                <option value="1,3">Face Masks & Gloves</option>
+                <option value="1,4">Eye & Ear Care</option>
               <optgroup label="Personal Care">
-                <option value="Personal Care,handwash">Hand Wash & Sanitizer</option>
-                <option value="Personal Care,bathcare">Bath Care</option>
-                <option value="Personal Care,femininecare">Feminine Care</option>
-                <option value="Personal Care,oralcare">Oral Care</option>
+                <option value="2,1">Hand Wash & Sanitizer</option>
+                <option value="2,2">Bath Care</option>
+                <option value="2,3">Feminine Care</option>
+                <option value="2,4">Oral Care</option>
               <optgroup label="Cosmetics">
-                <option value="Cosmetics,cotton">Cotton</option>
-                <option value="Cosmetics,fragance">Fragance</option>
-                <option value="Cosmetics,face">Face</option>
-                <option value="Cosmetics,lips">Lips</option>
+                <option value="3,1">Cotton</option>
+                <option value="3,2">Fragance</option>
+                <option value="3,3">Face</option>
+                <option value="3,4">Lips</option>
               <optgroup label="Baby Care">
-                <option value="Baby Care,babydaipers">Baby Daipers</option>
-                <option value="Baby Care,babyfood">Baby Food</option>
-                <option value="Baby Care,babywipes">Baby Wipes</option>
+                <option value="4,1">Baby Daipers</option>
+                <option value="4,2">Baby Food</option>
+                <option value="4,3">Baby Wipes</option>
             </select>
           </div>
 
