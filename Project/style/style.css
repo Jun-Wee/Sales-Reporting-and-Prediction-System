@@ -139,14 +139,34 @@ footer{
 
 .footer-bottom{
   color: white;
-  padding: 15px;
   text-align: center;
 }
 
-.footer-bottom a{
-  overflow: hidden;
-  text-decoration: none;
-  color: red;
+.footer-choose{
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.footer-choose h4{
+  text-align: left;
+  font-size: 18px;
+  color: #fff;
+  text-transform: capitalize;
+  position: relative;
+  padding-right: 20px;
+}
 
+.footer-choose h4::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  background-color: red;
+  height: 2px;
+  box-sizing: border-box;
+  width: 30px;
+}
+
+.footer-choose h4:hover {
+  color: aquamarine;
+}
