@@ -55,3 +55,43 @@ form div{
 label{
   width: 90px;
 }
+
+.login_page{
+  background-image: url("../image/pharmacy.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+
+#txt{
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  font-size: 40px;
+  text-align: center;
+}
+
+#loginForm{
+  text-align: center;
+  margin-top: 7%;
+  font-size: 30px;
+  size: 30px;
+}
+
+#Login_button{
+  background: #0078A0; 
+  border: none; 
+  color: #fff; 
+  font-family: 'Helvetica Neue', sans-serif; 
+  font-size: 20px; 
+  padding: 10px;
+}
+
+input[type=text], input[type=password] {
+  width: 10%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+

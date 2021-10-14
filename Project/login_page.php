@@ -1,4 +1,30 @@
-<?php include_once "include/header.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> PHP </title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="style/style.css" type="text/css" />
+  <meta name="author" content="" />
+</head>
+<body class="login_page" onload="startTime()">
+<div id="txt"></div>
+<script>
+function startTime() {
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+  setTimeout(startTime, 1000);
+}
+
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
 
 <!-- login form -->
 <form id="loginForm" method="post" action="login_process.php">
@@ -11,16 +37,15 @@
       <label for="password">Password&#58;</label>
       <input id="password" type="password" name="psw" value="admin" />
     </p>
-    <input type="submit" value="login" name="login"/>
+    <input type="submit" value="login" name="login" id="Login_button"/>
     <p>default account <br/> username: admin <br /> password: admin <br/><br />
       *Login to signup for new user.
     </p>
 
-    </form>
+  </form>
 
-
-    <!-- CREATE DB & DEFAULT ACCOUNT -->
-    <?php
+   <!-- CREATE DB & DEFAULT ACCOUNT -->
+   <?php
     //create connection server to create DB
     $conn = mysqli_connect("localhost", "root", "");
 
@@ -61,6 +86,5 @@
     }
 
     ?>
-
 </body>
-
+</html>
