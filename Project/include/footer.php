@@ -3,7 +3,7 @@
 <footer>    
 <div class="footer-bottom">
         <div class="footer-choose"> 
-            <h4>User Manual</h4>
+            <h4><a href="usermanual.php">User Manual</a></h4>
             <h4>FAQ</h4> 
             <h4>Online Shop</f4>
         </div>

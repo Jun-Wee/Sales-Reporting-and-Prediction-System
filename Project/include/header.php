@@ -12,11 +12,11 @@
 	<header>
 		<div class="navigationbar">
 			<nav>
-				<a href="#?">People Health Pharmacy</a>
+				<a href="index.php">People Health Pharmacy</a>
 				<div class="link">
-				<a href="#manage">Sales</a>
-				<a href="#dashboard">Dashboard</a>
-				<a href="#analysis">Inventory</a>
+				<a href="salesmodule.php">Sales</a>
+				<a href="index.php">Dashboard</a>
+				<a href="#inventory">Inventory</a>
 				<a href="#analysis">Analysis</a>
 				</div>
 			</nav>

@@ -167,6 +167,11 @@ footer{
   width: 30px;
 }
 
-.footer-choose h4:hover {
+.footer-choose a{
+  text-decoration: none;
+  color: white;
+}
+
+.footer-choose a:hover {
   color: aquamarine;
 }

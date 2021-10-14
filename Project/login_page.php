@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title> PHP </title>
+  <title> People Health Pharmacy </title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style/style.css" type="text/css" />
   <meta name="author" content="" />
