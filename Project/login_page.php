@@ -37,7 +37,8 @@
     //sql to create useraccount table
     $sql = "CREATE TABLE useraccount (
     username VARCHAR(15) NOT NULL UNIQUE PRIMARY KEY,
-    password CHAR(40) NOT NULL
+    password CHAR(40) NOT NULL,
+    role INT NOT NULL
     )";
 
     //create table
@@ -53,8 +54,8 @@
     $user = "admin";
     $psw = "admin";
     $sql = "INSERT INTO useraccount
-            (username, password)
-            VALUES ('admin', 'admin')";
+            (username, password, role)
+            VALUES ('admin', 'admin', 0)";
 
     if(mysqli_query($conn, $sql)) {
     echo "Successfully create default account <br /> username: admin <br /> password: admin";

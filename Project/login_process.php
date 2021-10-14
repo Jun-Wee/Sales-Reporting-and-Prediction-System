@@ -35,7 +35,8 @@ if(!mysqli_stmt_prepare($stmt, $query)){
     else if($pwdCheck == true){
       session_start();
       $_SESSION["login_status"] = true;
-      header("Location:addsales.php"); //access granted
+      $_SESSION["role"] = $row["role"];
+      header("Location:salesmodule.php"); //access granted
       exit();
     }
   }
