@@ -109,7 +109,7 @@ VALUES
 
 -- Select all data for display in salesmodule
 SELECT `sales.sales_id`, `category.category_name`, `product.product_name`, `product.price`, `sales.date`
-FROM (((`sales_list`
-INNER JOIN `sales` ON `sales_list.sales_id`=`sales.sales_id`)
-      INNER JOIN `product` ON `sales_list.product_id`=`product.product_id`)
-      INNER JOIN `category` on `product.category_id`=`category.category_id`)
+  FROM (((`sales_list`
+  INNER JOIN `sales` ON `sales_list.sales_id`=`sales.sales_id`)
+  INNER JOIN `product` ON `sales_list.product_id`=`product.product_id`)
+  INNER JOIN `category` on `product.category_`id=`category.category_id`) ORDER BY `sales_id`;
