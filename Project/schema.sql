@@ -1,66 +1,54 @@
 -- 
 -- Create database
 -- 
-CREATE DATABASE `phpsreps`
+DROP DATABASE `phpsreps`;
+CREATE DATABASE `phpsreps`;
 
--- 
--- Create sales table
--- 
-CREATE TABLE `sales` (
-  `sales_id` int(8) NOT NULL ,
-  `date` varchar(20) NOT NULL,
-  PRIMARY KEY (`sales_id`)
-) 
+CREATE TABLE `category`(
+  `category_id` int(8) NOT NULL,
+  `category_name` varchar(50) NOT NULL,
+  PRIMARY KEY(`category_id`)
+);
 
--- 
--- Create salesList table
--- 
-CREATE TABLE `sales_list`(
-  `sales_id` int(8) NOT NULL,
-  `product_id` int(8) NOT NULL,
-  `quantity` int(8) NOT NULL,
-  
-)
-
--- 
--- Create product table
--- 
 CREATE TABLE `product`(
   `product_id` int(8) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `category_id` int(8) NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (`product_id`) 
-)
+  PRIMARY KEY (`product_id`) ,
+  FOREIGN KEY (`category_id`) REFERENCES `category`(`category_id`)
+);
 
--- 
--- Create inventory table
--- 
 CREATE TABLE `inventory`(
   `product_id` int(8) NOT NULL,
   `stock` int(10) NOT NULL,
-  PRIMARY KEY(`product_id`)
-)
+  PRIMARY KEY(`product_id`),
+  FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
+);
 
--- 
--- Create category table
--- 
-CREATE TABLE `category`(
-  `category_id` int(8) NOT NULL,
-  `category_name` varchar(50) NOT NULL,
-  PRIMARY KEY(`category_id`)
-)
+CREATE TABLE `sales` (
+  `sales_id` int(8) NOT NULL AUTO_INCREMENT,
+  `date` varchar(20) NOT NULL,
+  PRIMARY KEY (`sales_id`)
+);
 
-ALTER TABLE `sales_list`
-  ADD FOREIGN KEY (`sales_id`) REFERENCES `sales`(`sales_id`),
-  ADD FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
+CREATE TABLE `sales_list`(
+  `sales_id` int(8) NOT NULL AUTO_INCREMENT,
+  `product_id` int(8) NOT NULL,
+  `quantity` int(8) NOT NULL,
+  PRIMARY KEY(`sales_id`, `product_id`),
+  FOREIGN KEY (`sales_id`) REFERENCES `sales`(`sales_id`),
+  FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
+);
 
-ALTER TABLE `product`
-  ADD FOREIGN KEY (`category_id`) REFERENCES `category`(`category_id`)
+ALTER TABLE `sales` AUTO_INCREMENT=100;
+ALTER TABLE `sales_list` AUTO_INCREMENT=100;
+-- ALTER TABLE `sales_list`
+-- ADD COLUMN `product_id` int(8) NOT NULL;
 
-ALTER TABLE `inventory`
-  ADD FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
-
+-- ALTER TABLE `sales_list`
+-- ADD CONSTRAINT `product_id`
+-- FOREIGN KEY(`product_id`) REFERENCES `product`(`product_id`); 
 
 -- insert data into category table
 INSERT INTO `category`(`category_id`, `category_name`) 
@@ -88,7 +76,6 @@ VALUES
 (14,"Baby Food",4,11),
 (15,"Baby Wipes",4,5);
 
---insert data into inventory default quantity of product is 20
 INSERT INTO `inventory`(`product_id`, `stock`) 
 VALUES
 (1, 20),
@@ -108,8 +95,15 @@ VALUES
 (15, 20);
 
 -- Select all data for display in salesmodule
-SELECT `sales.sales_id`, `category.category_name`, `product.product_name`, `product.price`, `sales.date`
+SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`, `product`.`price`, `sales`.`date`
   FROM (((`sales_list`
-  INNER JOIN `sales` ON `sales_list.sales_id`=`sales.sales_id`)
-  INNER JOIN `product` ON `sales_list.product_id`=`product.product_id`)
-  INNER JOIN `category` on `product.category_`id=`category.category_id`) ORDER BY `sales_id`;
+  INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
+  INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
+  INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) ORDER BY `sales_id`;
+
+-- Select all data used in editsales.php
+SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`,`sales_list`.`quantity`, `product`.`price`, `sales_list`.`quantity`*`product`.`price` AS `total`, `sales`.`date` 
+    FROM (((`sales_list`
+    INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
+    INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
+    INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) WHERE `sales`.`sales_id`='$id';
