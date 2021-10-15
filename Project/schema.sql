@@ -43,12 +43,6 @@ CREATE TABLE `sales_list`(
 
 ALTER TABLE `sales` AUTO_INCREMENT=100;
 ALTER TABLE `sales_list` AUTO_INCREMENT=100;
--- ALTER TABLE `sales_list`
--- ADD COLUMN `product_id` int(8) NOT NULL;
-
--- ALTER TABLE `sales_list`
--- ADD CONSTRAINT `product_id`
--- FOREIGN KEY(`product_id`) REFERENCES `product`(`product_id`); 
 
 -- insert data into category table
 INSERT INTO `category`(`category_id`, `category_name`) 
@@ -63,11 +57,11 @@ VALUES
 (1,"Vitamins",1,5),
 (2,"First Aid",1,6),
 (3,"Face Mask",1,7),
-(4,"VitaEye & Ear Caremins",1,8),
+(4,"Eye & Ear Care",1,8),
 (5,"Hand Wash",2,9),
 (6,"Bath Care",2,7),
-(7,"Feminine Care",3,4),
-(8,"Oral Care",4,6),
+(7,"Feminine Care",2,4),
+(8,"Oral Care",2,6),
 (9,"Cotton",3,5),
 (10,"Fragance",3,7),
 (11,"Face",3,9),
@@ -94,16 +88,17 @@ VALUES
 (14, 20),
 (15, 20);
 
--- Select all data for display in salesmodule
-SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`, `product`.`price`, `sales`.`date`
-  FROM (((`sales_list`
-  INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
-  INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
-  INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) ORDER BY `sales_id`;
+-- Select all data for display in salesmodule.php
+SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`, `product`.`price`, `sales`.`date`, `sales_list`.`quantity` *` product`.`price` AS `total`
+FROM (((`sales_list`
+INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
+INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
+INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) ORDER BY `sales_id`;
 
 -- Select all data used in editsales.php
 SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`,`sales_list`.`quantity`, `product`.`price`, `sales_list`.`quantity`*`product`.`price` AS `total`, `sales`.`date` 
-    FROM (((`sales_list`
-    INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
-    INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
-    INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) WHERE `sales`.`sales_id`='$id';
+FROM (((`sales_list`
+INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
+INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
+INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) WHERE `sales`.`sales_id`='$id';
+
