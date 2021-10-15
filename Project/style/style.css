@@ -34,7 +34,7 @@ body{
   margin-right: 40px;
 }
 
-#edit_table, td {
+#edit_table, td, table {
   border: 1px solid black;
   text-align: center;
 }
@@ -174,4 +174,13 @@ footer{
 
 .footer-choose a:hover {
   color: aquamarine;
+}
+
+#edit_form{
+  display: flex;
+}
+
+#edit_form p{
+  margin: 0;
+  padding: 0;
 }
