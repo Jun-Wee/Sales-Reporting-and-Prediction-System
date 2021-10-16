@@ -80,7 +80,28 @@
 
           <div>
             <label for="id">Sales Id: </label>
-            <input type="text" id="sid" name="sid" value="AUTO"> 
+            <?php
+              include "conn.php";
+              
+              $sql = mysqli_query($conn, "SELECT COUNT(*) AS Count FROM sales");
+              $data = mysqli_fetch_array($sql);
+              $count = $data['Count'];
+              mysqli_close($conn);
+
+              if($count >= 1){
+                include "conn.php";
+
+                $sql = mysqli_query($conn, "SELECT *FROM sales ORDER BY sales_id DESC LIMIT 1");
+                $data = mysqli_fetch_array($sql);
+                $id = $data['sales_id'] + 1;
+                echo "<span>$id</span>"; 
+                
+                mysqli_close($conn);  
+              }else{
+                echo "<span>100</span>";   
+              }
+
+            ?>
           </div>
 
           <div>
