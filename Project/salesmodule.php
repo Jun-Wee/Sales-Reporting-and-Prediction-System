@@ -4,33 +4,44 @@
     header("Location:login_page.php");
   }
   include "conn.php";
-?>
+  
+  $sql = mysqli_query($conn, "SELECT * FROM sales");
+  if(!$sql){
+    include "createtable.php";
+  }else{
+    mysqli_close($conn);
+  }
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="keywords" content="HTML5, tags"/>
-<title>Manage module</title>
-<link href="style/style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<?php include("include/header.php");?>
-<body>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="keywords" content="HTML5, tags"/>
+    <title>Manage module</title>
+    <link href="style/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  
+  <?php include("include/header.php");?>
+  <body>
   <section>
     <div>
       <h2>Sales table</h2>
       <table style="border: 2;">
         <tr>
-          <td>Sales ID</td>
-          <td>Category</td>
-          <td>Product</td>
-          <td>Total</td>
-          <td>Date</td>
+          <th>Sales ID</th>
+          <th>Category</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+          <th>Date</th>
+          <th colspan="2">Action</th>
         </tr>
         <?php
 
-        $records = mysqli_query($conn, "SELECT sales.sales_id, category.category_name, product.product_name, product.price, sales.date, sales_list.quantity * product.price AS total
+        include "conn.php";
+        $records = mysqli_query($conn, "SELECT sales.sales_id, category.category_name, product.product_name, sales_list.quantity, product.price, sales_list.quantity * product.price AS total, sales.date
         FROM (((sales_list
         INNER JOIN sales ON sales_list.sales_id=sales.sales_id)
         INNER JOIN product ON sales_list.product_id=product.product_id)
@@ -44,6 +55,8 @@
           <td><?php echo $data['sales_id']; ?></td>
           <td><?php echo $data['category_name']; ?></td>
           <td><?php echo $data['product_name']; ?></td>    
+          <td><?php echo $data['quantity']; ?></td>    
+          <td><?php echo $data['price']; ?></td>    
           <td><?php echo $data['total']; ?></td>    
           <td><?php echo $data['date']; ?></td>    
           <td><a href="editsales.php?id=<?php echo $data['sales_id']; ?>" name="edit">Edit</a></td>
@@ -52,6 +65,7 @@
         <?php
           }
         }
+        mysqli_close($conn);
         ?>
       </table>
     </div>
@@ -108,13 +122,9 @@
           <div>
             <label for="date">Date: </label> 
             <input type="date" name="date" id="date" value="<?php date_default_timezone_set('Asia/Kuching'); echo date('Y-m-d');?>">
-            <?php 
-              // echo date("d-M-Y")
-            ?>
           </div>
 
           <div>
-            <!-- <input type="button" onclick="myFunction()" value="Add"> -->
             <input type="submit" value="Submit">
           </div>
 
