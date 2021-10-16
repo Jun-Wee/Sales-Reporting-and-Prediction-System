@@ -1,8 +1,7 @@
 <?php
     include "conn.php";
     
-    if(!empty($_POST['sid']) && !empty($_POST['cat']) && !empty($_POST['quantity']) && !empty($_POST['total']) && !empty($_POST['date'])){
-        $sid = $_POST['sid'];
+    if(!empty($_POST['cat']) && !empty($_POST['quantity']) && !empty($_POST['total']) && !empty($_POST['date'])){
         $product = $_POST['cat'];
         $product_data = explode(",", $product);
         $category_id = $product_data[0];
