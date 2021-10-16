@@ -34,7 +34,7 @@ body{
   margin-right: 40px;
 }
 
-#edit_table, td, table {
+#edit_table, td, th, table {
   border: 1px solid black;
   text-align: center;
 }
