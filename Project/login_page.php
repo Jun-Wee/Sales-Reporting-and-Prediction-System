@@ -50,14 +50,14 @@ function checkTime(i) {
     $conn = mysqli_connect("localhost", "root", "");
 
     //create DB
-    $sql = "CREATE DATABASE phpreps";
+    $sql = "CREATE DATABASE phpsreps";
     @mysqli_query($conn, $sql);
 
     //close connection
     mysqli_close($conn);
 
     //create connection to DB
-    $conn = mysqli_connect("localhost","root", "", "phpreps");
+    $conn = mysqli_connect("localhost","root", "", "phpsreps");
 
     //sql to create useraccount table
     $sql = "CREATE TABLE useraccount (
@@ -73,7 +73,7 @@ function checkTime(i) {
     mysqli_close($conn);
 
     //create connection to DB
-    $conn = mysqli_connect("localhost","root", "", "phpreps");
+    $conn = mysqli_connect("localhost","root", "", "phpsreps");
 
     //sql to create a default account for testing
     $user = "admin";
