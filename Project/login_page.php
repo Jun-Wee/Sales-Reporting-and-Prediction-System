@@ -8,6 +8,7 @@
 </head>
 <body class="login_page" onload="startTime()">
 <div id="txt"></div>
+
 <script>
 function startTime() {
   const today = new Date();
@@ -49,14 +50,14 @@ function checkTime(i) {
     $conn = mysqli_connect("localhost", "root", "");
 
     //create DB
-    $sql = "CREATE DATABASE phpsreps";
+    $sql = "CREATE DATABASE phpreps";
     @mysqli_query($conn, $sql);
 
     //close connection
     mysqli_close($conn);
 
     //create connection to DB
-    $conn = mysqli_connect("localhost","root", "", "phpsreps");
+    $conn = mysqli_connect("localhost","root", "", "phpreps");
 
     //sql to create useraccount table
     $sql = "CREATE TABLE useraccount (
@@ -72,7 +73,7 @@ function checkTime(i) {
     mysqli_close($conn);
 
     //create connection to DB
-    $conn = mysqli_connect("localhost","root", "", "phpsreps");
+    $conn = mysqli_connect("localhost","root", "", "phpreps");
 
     //sql to create a default account for testing
     $user = "admin";

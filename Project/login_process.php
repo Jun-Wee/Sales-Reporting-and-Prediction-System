@@ -8,7 +8,7 @@ $username = $_POST["usrName"];
 $password = $_POST["psw"];
 
 //connect to useraccount DB and prepare for checking
-$conn = mysqli_connect("localhost","root", "", "phpsreps");
+$conn = mysqli_connect("localhost","root", "", "phpreps");
 $query = "SELECT * FROM useraccount WHERE username=?;";
 $stmt = mysqli_stmt_init($conn);
 

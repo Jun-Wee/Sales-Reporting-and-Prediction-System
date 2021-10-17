@@ -1,5 +1,4 @@
 <html>
-<link rel="stylesheet" href="../style/style.css" type="text/css" />
 <footer>    
 <div class="footer-bottom">
         <div class="footer-choose"> 

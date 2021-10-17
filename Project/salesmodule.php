@@ -1,18 +1,3 @@
-<?php
-  session_start();
-  if(!$_SESSION["login_status"] == true){
-    header("Location:login_page.php");
-  }
-  include "conn.php";
-  
-  $sql = mysqli_query($conn, "SELECT * FROM sales");
-  if(!$sql){
-    include "createtable.php";
-  }else{
-    mysqli_close($conn);
-  }
-  ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
