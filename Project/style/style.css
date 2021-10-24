@@ -184,3 +184,42 @@ footer{
   margin: 0;
   padding: 0;
 }
+
+
+/*dashboard*/
+.container{
+	overflow:hidden;
+}
+
+.catbox{
+	width: 30%;
+  height: 500px;
+  margin-top: 10%;
+	float: left;
+  margin-left: 45px;
+	overflow: hidden;
+	position: relative;
+	background: black;
+}
+
+.catbox span{
+	width: 100%;
+	line-height: 35px;
+	background: rgba(0,0,0,0.2);
+	color: white;
+	display: block;
+	bottom: 30px;
+	position: absolute;
+	text-align: center;
+}
+
+.catbox img{
+	width: 100%;
+  height: 100%;
+	transition: all .5s ease;
+}
+
+.catbox:hover img{
+	transform:scale(1.3,1.3);
+	transition: all .5s ease;
+}
