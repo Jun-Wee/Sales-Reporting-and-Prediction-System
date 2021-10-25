@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="keywords" content="HTML5, tags"/>
-    <title>Manage module</title>
+    <title> People Health Pharmacy</title>
     <link href="style/style.css" rel="stylesheet" type="text/css" />
   </head>
   
   <body>
-
+  <?php include_once "include/header.php"; ?>
+  <h1 class = "para0"> Dashboard </h1>
 	<div class="container">	
 		<a href="salesmodule.php">
 			<div class="catbox">
@@ -31,5 +32,6 @@
 			</div>
 		</a>
 	</div>
+	<?php include("include/footer.php");?>
 </body>
 </html>

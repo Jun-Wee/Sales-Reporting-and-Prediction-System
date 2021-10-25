@@ -29,7 +29,7 @@
 				<a href="index.php">People Health Pharmacy</a>
 				<div class="link">
 				<a href="salesmodule.php">Sales</a>
-				<a href="index.php">Dashboard</a>
+				<a href="dashboard.php">Dashboard</a>
 				<a href="#inventory">Inventory</a>
 				<a href="#analysis">Analysis</a>
 				<a href="logout_process.php">Logout</a>
