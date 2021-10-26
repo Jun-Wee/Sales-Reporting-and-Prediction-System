@@ -8,7 +8,6 @@
   </head>
   
   <body>
-  <?php include_once "include/header.php"; ?>
   <h1 class = "para0"> Dashboard </h1>
 	<div class="container">	
 		<a href="salesmodule.php">
@@ -32,6 +31,7 @@
 			</div>
 		</a>
 	</div>
-	<?php include("include/footer.php");?>
+	<?php include("include/footer.php");?> 
+
 </body>
 </html>

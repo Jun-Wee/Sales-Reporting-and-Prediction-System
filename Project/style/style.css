@@ -116,6 +116,7 @@ label{
   font-family: verdana;
   font-size: 35px;
   text-align: left;
+  margin-top: auto;
   padding-right: 180px;
   padding-top: 15px;
 }
@@ -139,7 +140,7 @@ label{
 
 /* footer section */
 footer{
-  position:fixed;
+  position:absolute;
   background-color: #333;
   bottom: 0;
   width: 100%;
@@ -197,14 +198,16 @@ footer{
 /*dashboard*/
 .container{
 	overflow:hidden;
+  margin: auto;
+  padding: auto;
 }
 
 .catbox{
 	width: 30%;
-  height: 500px;
-  margin-top: 10%;
+  height: 480px;
+  margin-top: 10px;
 	float: left;
-  margin-left: 45px;
+  margin-left: 40px;
 	overflow: hidden;
 	position: relative;
 	background: black;
