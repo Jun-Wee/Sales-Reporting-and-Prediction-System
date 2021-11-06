@@ -1,7 +1,6 @@
 <?php include("include/header.php");?>
 <?php
-    include "conn.php";
-    
+
     if(!empty($_POST['cat']) && !empty($_POST['quantity']) && !empty($_POST['total']) && !empty($_POST['date'])){
         $product = $_POST['cat'];
         $product_data = explode(",", $product);
@@ -11,15 +10,36 @@
         $total = $_POST['total'];
         $date = $_POST['date'];
 
-        $sql = "INSERT INTO `sales` (`date`) VALUES ('$date');";
-        $last_id = $conn->insert_id; 
-        $sql .= "INSERT INTO `sales_list`(`sales_id`, `product_id`, `quantity`) VALUES ($last_id, $product_id, $qty);";
+        $conn = @mysqli_connect("localhost", "root", "", "phpsreps");
+        $sql = "SELECT stock FROM inventory WHERE product_id = '$product_id'";
+        $result = mysqli_query($conn, $sql);
+        $data = mysqli_fetch_assoc($result);
+        $quantity =  $data['stock'];
+        mysqli_close($conn);
+        
+        if($qty <= $quantity){
+            $conn = @mysqli_connect("localhost", "root", "", "phpsreps");
+            $last_id = $conn->insert_id; 
+            $sql = "INSERT INTO `sales` (`date`) VALUES ('$date'); INSERT INTO `sales_list`(`sales_id`, `product_id`, `quantity`) VALUES ($last_id, $product_id, $qty);";
+            $result = @mysqli_multi_query($conn, $sql);
+            mysqli_close($conn);
 
-        if (mysqli_multi_query($conn, $sql)) { 
+            if ($result) { 
+                $conn = @mysqli_connect("localhost", "root", "", "phpsreps");
+                $sql = "UPDATE inventory SET stock = stock - $qty WHERE product_id = $product_id";
+                @mysqli_query($conn, $sql); 
+                mysqli_close($conn);
                 header("location:salesmodule.php");       
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+    
+            } else {
+                echo "Failed to update inventory";
+            }
+        }else{
+            echo "Insufficient stock";
         }
+
+
+
     }else{
         if(empty($_POST['cat'])){
             echo "<p>Please select a product to add. Thank you.</p>";
