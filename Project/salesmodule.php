@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="keywords" content="HTML5, tags"/>
-    <title>Manage module</title>
+    <title>Sales module</title>
     <link href="style/style.css" rel="stylesheet" type="text/css" />
   </head>
   
