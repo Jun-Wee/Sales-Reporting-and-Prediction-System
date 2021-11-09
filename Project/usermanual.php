@@ -4,12 +4,10 @@
   <title> People Health Pharmacy </title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style/style.css" type="text/css" />
-  
+
   <meta name="author" content="" />
 </head>
 <body class = "dashboard">
-
-
 <?php include_once "include/header.php"; ?>
 <h1 class = "para1">
     User Manual
@@ -43,7 +41,7 @@ How to use Analysis Module?
   <li></li>
 </ol>
 </p>
-<?php include("include/footer.php");?>
+<?php include("include/footer2.php");?>
 </body>
 </html>
 

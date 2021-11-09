@@ -1,5 +1,5 @@
 <html>
-<footer class=footer>    
+<footer class="footer2">    
 <div class="footer-bottom">
     <div class="footer-choose"> 
         <h4><a href="usermanual.php">User Manual</a></h4>
