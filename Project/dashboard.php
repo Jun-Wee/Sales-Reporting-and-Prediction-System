@@ -17,14 +17,14 @@
 			</div>
 		</a>
 				
-		<a href="inventory.php">
+		<a href="inventorymodule.php">
 			<div class="catbox">
 				<img src="image/inventory.jpg" alt="inventory" />
 				<span>Inventory</span>
 			</div>
 		</a>
 				
-		<a href="analysis.php">
+		<a href="analysismodule.php">
 			<div class="catbox">
 				<img src="image/analysis-image.jpg" alt="analysis" />
 				<span>Analysis</span>
