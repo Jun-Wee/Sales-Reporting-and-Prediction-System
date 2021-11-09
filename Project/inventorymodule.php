@@ -5,57 +5,42 @@
     <meta name="keywords" content="HTML5, tags"/>
     <title>inventory module</title>
     <link href="style/style.css" rel="stylesheet" type="text/css" />
+    
 </head>
 
 
 <body>
 <?php include("include/header.php");?>
 
-<!-- javascript for control filter panel -->
-<!-- <script>
-    $("#sb").change(function() {
-        if ($(this).val() == "product"){
-            alert("test");
-            $('#otherFieldDiv').show();
-            $('#otherFieldDiv1').hide();
-        }
-        else if ($(this).val() == "categories"){
-            $('#otherFieldDiv1').show();
-            $('#otherFieldDiv').hide();
-        }
-        else{
-            $('#otherFieldDiv1').hide();
-            $('#otherFieldDiv').hide();
-        }
-    });
-    $("#sb").trigger("change");
-</script> -->
-
 <aside>
 <div>
 <form action="xx">
     <fieldset>
         <legend>Filter Panel:</legend>
-
-        <label for="sb">Search by:</label>
-        <select id="sb" name="sb">
-        <option value="product">Product</option>
-        <option value="categories">Categories</option>
+        
+        <label for="cat" >Search by:</label>
+        <select id="cat" name="cat">
+            <option value="" disabled selected>Search by</option>
+            <option value="name">Product Name</option>
+            <option value="category">Categories</option>
         </select><br><br>
 
         <!-- option 1 -->
-        <!-- <label for="pname" id="pname">Product Name:</label>
-        <input type="text" id="pname" name="pname"><br><br> -->
+        <div id="nameDiv" class="hide">
+            <label for="pname">Product Name:</label><br>
+            <input type="text" id="pname" name="pname"><br>
+        </div>
         
         <!-- option 2 -->
-        <label for="cat" id="cat">Categories:</label>
-        <select id="cat" name="cat">
-        <option value="" disabled selected>Select Categories</option>
-        <option value="health">Health</option>
-        <option value="personalcare">Personal Care</option>
-        <option value="cosmetics">Cosmetics</option>
-        <option value="babycare">Baby Care</option>
-        </select><br><br>
+        <div id="catDiv" class="hide">
+            <label for="pname">Product Categories:</label><br>
+            <select name="name" id="name">
+                <option value="" disabled selected>Select Categories</option>
+                <option value="health">Health</option>
+                <option value="personalcare">Personal Care</option>
+                <option value="cosmetics">Cosmetics</option>
+            </select>
+        </div>
 
         <label for="order">Order:</label>
         <select id="cars" name="cars">
@@ -130,6 +115,6 @@
     </table>
 </div>
 <?php include("include/footer.php");?>
-
+<script src="main.js"></script>
 </body>
 </html>

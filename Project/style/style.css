@@ -239,6 +239,7 @@ body#dashboard{
 	transition: all .5s ease;
 }
 
+/* inventory module filter panel */
 .hide{
   visibility: hidden;
   display: none;
