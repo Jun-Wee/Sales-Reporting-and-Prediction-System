@@ -196,6 +196,10 @@ footer{
 
 
 /*dashboard*/
+body#dashboard{
+  background-color: #a4dbda;
+}
+
 .container{
 	overflow:hidden;
   margin: auto;

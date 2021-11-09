@@ -7,7 +7,7 @@
     <link href="style/style.css" rel="stylesheet" type="text/css" />
   </head>
   
-  <body>
+  <body id = "dashboard">
   <h1 class = "para0"> Dashboard </h1>
 	<div class="container">	
 		<a href="salesmodule.php">
