@@ -136,6 +136,7 @@ label{
   font-size: 20px;
   text-align: left;
   padding-right: 100px;
+  padding-left: 700px;
   padding-top: 10px;
 }
 
@@ -149,7 +150,7 @@ label{
 
 /* footer section */
 footer{
-  position:relative;
+  position:absolute;
   background-color: #333;
   width: 100%;
   bottom: 0;
@@ -195,6 +196,7 @@ footer{
 .footer-choose a:hover {
   color: aquamarine;
 }
+
 
 #edit_form{
   display: flex;
