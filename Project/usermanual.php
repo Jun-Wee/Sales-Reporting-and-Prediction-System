@@ -24,11 +24,8 @@ How to use Sales Module?
 <p class = "para2">
 How to use Inventory Module?
 <ol class = "usertable">
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
+  <li>The table will show the product details</li>
+  <li>At right side, the table allow to find the category of the product by using the dropdown menu</li>
 </ol>
 </p>
 <p class = "para2">
