@@ -10,11 +10,13 @@
 
 
 <body>
-<?php include("include/header.php");?>
+<?php 
+include("include/header.php");
+?>
 
 <aside>
 <div>
-<form action="xx">
+<form action="inventorymodule.php">
     <fieldset>
         <legend>Filter Panel:</legend>
         
@@ -36,17 +38,18 @@
             <label for="pname">Product Categories:</label><br>
             <select name="name" id="name">
                 <option value="" disabled selected>Select Categories</option>
-                <option value="health">Health</option>
-                <option value="personalcare">Personal Care</option>
-                <option value="cosmetics">Cosmetics</option>
+                <option value="Health">Health</option>
+                <option value="Personal Care">Personal Care</option>
+                <option value="Cosmetics">Cosmetics</option>
+                <option value="Baby Care">Baby Care</option>
             </select>
         </div>
 
         <label for="order">Order:</label>
         <select id="cars" name="cars">
         <option value="" disabled selected>Select Order</option>
-        <option value="asc">Ascending</option>
-        <option value="des">Descending</option>
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
         </select><br><br>
 
      <input type="submit" value="Submit">
@@ -55,65 +58,169 @@
 </div>
 </aside>
 
-<div>
-    <table style="border: 2;">
-        <tr>
-            <th>Category</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Per unit price</th>
-            <th colspan="2">Action</th>
-        </tr>
-        <tr>
-            <td>Health</td>
-            <td>Vitamins</td>
-            <td>100</td>
-            <td>$ 33</td>
-            <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
-        </tr>
-        <tr>
-            <td>Health</td>
-            <td>Vitamins</td>
-            <td>100</td>
-            <td>$ 33</td>
-            <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
-        </tr>
-        <tr>
-            <td>Health</td>
-            <td>Vitamins</td>
-            <td>100</td>
-            <td>$ 33</td>
-            <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
-        </tr>
-        <tr>
-           <td>Health</td>
-            <td>Vitamins</td>
-            <td>100</td>
-            <td>$ 33</td>
-            <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
-        </tr>
-        <tr>
-           <td>Health</td>
-            <td>Vitamins</td>
-            <td>100</td>
-            <td>$ 33</td>
-            <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
-        </tr>
-        <tr>
-            <td>Health</td>
-            <td>Vitamins</td>
-            <td>100</td>
-            <td>$ 33</td>
-            <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
-        </tr>
-    </table>
-</div>
+<?php 
+include "conn.php";
+
+if(!isset($_GET['cat']))
+{
+    // without search or search submitted without search by selection
+
+    echo "<div>";
+    echo "<table style='border:2;\'>";
+    echo "<tr>";
+    echo "<th>Category</th>";
+    echo "<th>Product</th>";
+    echo "<th>Quantity</th>";
+    echo "<th>Per unit price</th>";
+    echo "<th colspan='2'>Action</th>";
+
+    echo "</tr>";
+    echo "</table>";
+    echo "</div>";
+}
+else
+{
+    // if search with selection
+    $cat = $_GET['cat'];
+
+    if($cat == "name")
+    {
+        $pname = $_GET['pname'];
+        $cars = "ASC";
+
+        if(isset($_GET['cars']))
+        {
+            $cars = $_GET['cars'];
+        }
+
+        // if search selection is name
+        if($pname == "")
+        {
+            // if no product name is keyed in
+            echo "<div>";
+            echo "<table style='border:2;\'>";
+            echo "<tr>";
+            echo "<th>Category</th>";
+            echo "<th>Product</th>";
+            echo "<th>Quantity</th>";
+            echo "<th>Per unit price</th>";
+            echo "<th colspan='2'>Action</th>";
+        
+            echo "</tr>";
+            echo "</table>";
+            echo "</div>";
+        }
+        else 
+        {
+            // if there is product name
+            $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            WHERE product.product_name LIKE'%$pname%'
+                                            ORDER BY product.product_name $cars;
+                                            ");
+
+            // $data = mysqli_fetch_array($query);
+
+            echo "<div>";
+            echo "<table style='border:2;\'>";
+            echo "<tr>";
+            echo "<th>Category</th>";
+            echo "<th>Product</th>";
+            echo "<th>Quantity</th>";
+            echo "<th>Per unit price</th>";
+            echo "<th colspan='2'>Action</th>";
+            echo "</tr>";
+
+            while ($data = mysqli_fetch_array($query)) 
+            {         
+                echo "<tr>";
+                echo "<td>$data[5]</td>";
+                echo "<td>$data[1]</td>";
+                echo "<td>$data[7]</td>";
+                echo "<td>$data[3]</td>";
+                echo "<td><a href='' name=''>Edit</a></td>";
+                echo "<td><a href='' name=''>Delete</a></td>";
+                echo "</tr>";
+            }
+
+            echo "</table>";
+            echo "</div>";
+
+        }
+    }
+
+    if($cat == "category")
+    {
+        // if search selection is category
+        if(!isset($_GET['name']))
+        {
+            // if no category is selected
+            echo "<div>";
+            echo "<table style='border:2;\'>";
+            echo "<tr>";
+            echo "<th>Category</th>";
+            echo "<th>Product</th>";
+            echo "<th>Quantity</th>";
+            echo "<th>Per unit price</th>";
+            echo "<th colspan='2'>Action</th>";
+        
+            echo "</tr>";
+            echo "</table>";
+            echo "</div>";
+        }
+        else
+        {
+            // if category is selected
+            $name = $_GET['name'];
+            $cars = "ASC";
+
+            if(isset($_GET['cars']))
+            {
+                $cars = $_GET['cars'];
+            }
+
+
+            $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            WHERE category.category_name='$name'
+                                            ORDER BY product.product_name $cars;
+                                            ");
+
+            echo "<div>";
+            echo "<table style='border:2;\'>";
+            echo "<tr>";
+            echo "<th>Category</th>";
+            echo "<th>Product</th>";
+            echo "<th>Quantity</th>";
+            echo "<th>Per unit price</th>";
+            echo "<th colspan='2'>Action</th>";
+            echo "</tr>";
+
+            while ($data = mysqli_fetch_array($query)) 
+            {         
+                echo "<tr>";
+                echo "<td>$data[5]</td>";
+                echo "<td>$data[1]</td>";
+                echo "<td>$data[7]</td>";
+                echo "<td>$data[3]</td>";
+                echo "<td><a href='' name=''>Edit</a></td>";
+                echo "<td><a href='' name=''>Delete</a></td>";
+                echo "</tr>";
+            }
+
+            echo "</table>";
+            echo "</div>";
+        }
+        
+    }
+}
+?>
 <?php include("include/footer.php");?>
 <script src="main.js"></script>
 </body>
