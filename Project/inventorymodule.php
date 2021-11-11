@@ -150,7 +150,6 @@ else
                 echo "<td>$data[7]</td>";
                 echo "<td>$data[3]</td>";
                 echo "<td><a href='' name=''>Edit</a></td>";
-                echo "<td><a href='' name=''>Delete</a></td>";
                 echo "</tr>";
             }
 
@@ -216,7 +215,6 @@ else
                 echo "<td>$data[7]</td>";
                 echo "<td>$data[3]</td>";
                 echo "<td><a href='' name=''>Edit</a></td>";
-                echo "<td><a href='' name=''>Delete</a></td>";
                 echo "</tr>";
             }
 
@@ -262,7 +260,6 @@ else
                 echo "<td>$data[7]</td>";
                 echo "<td>$data[3]</td>";
                 echo "<td><a href='' name=''>Edit</a></td>";
-                echo "<td><a href='' name=''>Delete</a></td>";
                 echo "</tr>";
             }
 
