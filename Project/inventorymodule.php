@@ -188,7 +188,6 @@ else
                 $product_order = $_GET['product_order'];
             }
 
-
             $query = mysqli_query($conn, "SELECT * 
                                             FROM (product INNER JOIN category
                                             ON product.category_id=category.category_id
