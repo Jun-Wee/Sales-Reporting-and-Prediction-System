@@ -186,7 +186,7 @@ else
 
             if(isset($_GET['product_order']))
             {
-                $cars = $_GET['product_order'];
+                $product_order = $_GET['product_order'];
             }
 
 
