@@ -45,8 +45,15 @@ include("include/header.php");
             </select>
         </div>
 
-        <label for="order">Order:</label>
-        <select id="cars" name="cars">
+        <label for="order">Product Order:</label>
+        <select id="product_order" name="product_order">
+        <option value="" disabled selected>Select Order</option>
+        <option value="asc">Ascending</option>
+        <option value="des">Descending</option>
+        </select><br><br>
+
+        <label for="order">Price Order:</label>
+        <select id="price_order" name="price_order">
         <option value="" disabled selected>Select Order</option>
         <option value="ASC">Ascending</option>
         <option value="DESC">Descending</option>
