@@ -36,14 +36,23 @@
             <label for="pname">Product Categories:</label><br>
             <select name="name" id="name">
                 <option value="" disabled selected>Select Categories</option>
+                <option value="all">All</option>
                 <option value="health">Health</option>
                 <option value="personalcare">Personal Care</option>
                 <option value="cosmetics">Cosmetics</option>
+                <option value="babycare">Baby Care</option>
             </select>
         </div>
 
-        <label for="order">Order:</label>
-        <select id="cars" name="cars">
+        <label for="order">Product Order:</label>
+        <select id="product_order" name="product_order">
+        <option value="" disabled selected>Select Order</option>
+        <option value="asc">Ascending</option>
+        <option value="des">Descending</option>
+        </select><br><br>
+
+        <label for="order">Price Order:</label>
+        <select id="price_order" name="price_order">
         <option value="" disabled selected>Select Order</option>
         <option value="asc">Ascending</option>
         <option value="des">Descending</option>
@@ -62,7 +71,8 @@
             <th>Product</th>
             <th>Quantity</th>
             <th>Per unit price</th>
-            <th colspan="2">Action</th>
+            <th>Action</th>
+            <!-- <th colspan="2">Action</th> -->
         </tr>
         <tr>
             <td>Health</td>
@@ -70,7 +80,7 @@
             <td>100</td>
             <td>$ 33</td>
             <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
+            <!-- <td><a href = "" name="">Delete</a></td> -->
         </tr>
         <tr>
             <td>Health</td>
@@ -78,7 +88,7 @@
             <td>100</td>
             <td>$ 33</td>
             <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
+           
         </tr>
         <tr>
             <td>Health</td>
@@ -86,7 +96,7 @@
             <td>100</td>
             <td>$ 33</td>
             <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
+            
         </tr>
         <tr>
            <td>Health</td>
@@ -94,7 +104,7 @@
             <td>100</td>
             <td>$ 33</td>
             <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
+            
         </tr>
         <tr>
            <td>Health</td>
@@ -102,7 +112,7 @@
             <td>100</td>
             <td>$ 33</td>
             <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
+            
         </tr>
         <tr>
             <td>Health</td>
@@ -110,7 +120,7 @@
             <td>100</td>
             <td>$ 33</td>
             <td><a href = "" name="">Edit</a></td>
-            <td><a href = "" name="">Delete</a></td>
+            
         </tr>
     </table>
 </div>
