@@ -48,8 +48,8 @@ include("include/header.php");
         <label for="order">Product Order:</label>
         <select id="product_order" name="product_order">
         <option value="" disabled selected>Select Order</option>
-        <option value="asc">Ascending</option>
-        <option value="des">Descending</option>
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
         </select><br><br>
 
         <label for="order">Price Order:</label>
@@ -93,11 +93,11 @@ else
     if($cat == "name")
     {
         $pname = $_GET['pname'];
-        $cars = "ASC";
+        $product_order = "ASC";
 
-        if(isset($_GET['cars']))
+        if(isset($_GET['product_order']))
         {
-            $cars = $_GET['cars'];
+            $product_order = $_GET['product_order'];
         }
 
         // if search selection is name
@@ -126,7 +126,7 @@ else
                                             INNER JOIN inventory
                                             ON product.product_id=inventory.product_id)
                                             WHERE product.product_name LIKE'%$pname%'
-                                            ORDER BY product.product_name $cars;
+                                            ORDER BY product.product_name $product_order;
                                             ");
 
             // $data = mysqli_fetch_array($query);
@@ -182,11 +182,11 @@ else
         {
             // if category is selected
             $name = $_GET['name'];
-            $cars = "ASC";
+            $product_order = "ASC";
 
-            if(isset($_GET['cars']))
+            if(isset($_GET['product_order']))
             {
-                $cars = $_GET['cars'];
+                $cars = $_GET['product_order'];
             }
 
 
@@ -196,7 +196,7 @@ else
                                             INNER JOIN inventory
                                             ON product.product_id=inventory.product_id)
                                             WHERE category.category_name='$name'
-                                            ORDER BY product.product_name $cars;
+                                            ORDER BY product.product_name $product_order;
                                             ");
 
             echo "<div>";
