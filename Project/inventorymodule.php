@@ -38,6 +38,7 @@ include("include/header.php");
             <label for="pname">Product Categories:</label><br>
             <select name="name" id="name">
                 <option value="" disabled selected>Select Categories</option>
+                <option value="All">All</option>
                 <option value="Health">Health</option>
                 <option value="Personal Care">Personal Care</option>
                 <option value="Cosmetics">Cosmetics</option>
@@ -155,7 +156,6 @@ else
 
             echo "</table>";
             echo "</div>";
-
         }
     }
 
@@ -175,6 +175,51 @@ else
             echo "<th colspan='2'>Action</th>";
         
             echo "</tr>";
+            echo "</table>";
+            echo "</div>";
+        }
+        elseif ($_GET['name'] == "All") 
+        {
+            // if category is selected
+            $name = $_GET['name'];
+            $product_order = "ASC";
+
+            if(isset($_GET['product_order']))
+            {
+                $product_order = $_GET['product_order'];
+            }
+
+
+            $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            ORDER BY product.product_name $product_order;
+                                            ");
+
+            echo "<div>";
+            echo "<table style='border:2;\'>";
+            echo "<tr>";
+            echo "<th>Category</th>";
+            echo "<th>Product</th>";
+            echo "<th>Quantity</th>";
+            echo "<th>Per unit price</th>";
+            echo "<th colspan='2'>Action</th>";
+            echo "</tr>";
+
+            while ($data = mysqli_fetch_array($query)) 
+            {         
+                echo "<tr>";
+                echo "<td>$data[5]</td>";
+                echo "<td>$data[1]</td>";
+                echo "<td>$data[7]</td>";
+                echo "<td>$data[3]</td>";
+                echo "<td><a href='' name=''>Edit</a></td>";
+                echo "<td><a href='' name=''>Delete</a></td>";
+                echo "</tr>";
+            }
+
             echo "</table>";
             echo "</div>";
         }
