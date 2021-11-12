@@ -1,13 +1,26 @@
 <?php include("include/header.php");?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
 <?php
 
-    if(!empty($_POST['cat']) && !empty($_POST['quantity']) && !empty($_POST['total']) && !empty($_POST['date'])){
+    if(!empty($_POST['cat']) && !empty($_POST['quantity']) && !empty($_POST['date'])){
         $product = $_POST['cat'];
         $product_data = explode(",", $product);
         $category_id = $product_data[0];
         $product_id = $product_data[1];
         $qty = $_POST['quantity'];
-        $total = $_POST['total'];
         $date = $_POST['date'];
 
         $conn = @mysqli_connect("localhost", "root", "", "phpsreps");
@@ -30,16 +43,12 @@
                 @mysqli_query($conn, $sql); 
                 mysqli_close($conn);
                 header("location:salesmodule.php");       
-    
             } else {
                 echo "Failed to update inventory";
             }
         }else{
-            echo "Insufficient stock";
+            echo "<script>alert('Insufficient stock: $quantity remaining.')</script>";
         }
-
-
-
     }else{
         if(empty($_POST['cat'])){
             echo "<p>Please select a product to add. Thank you.</p>";

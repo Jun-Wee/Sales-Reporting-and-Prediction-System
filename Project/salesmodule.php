@@ -9,10 +9,10 @@
   
   <?php include("include/header.php");?>
   <body>
-  <section>
+  <section class="sales_section">
     <div>
       <h2>Sales table</h2>
-      <table style="border: 2;">
+      <table>
         <tr>
           <th>Sales ID</th>
           <th>Category</th>
@@ -119,12 +119,7 @@
             <label for="quantity">Quantity: </label> 
             <input type="number" id="quantity" name="quantity" value="1">
           </div>
-
-          <div>
-            <label for="total">Total: </label> 
-            <input type="number" id="total" name="total" value="1">
-          </div>
-
+          
           <div>
             <label for="date">Date: </label> 
             <input type="date" name="date" id="date" value="<?php date_default_timezone_set('Asia/Kuching'); echo date('Y-m-d');?>">

@@ -38,6 +38,11 @@
         FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
       );
 
+      CREATE TABLE IF NOT EXISTS`months`(
+        `month_number` int(11),
+        `month_name` varchar(20)
+      );
+
       ALTER TABLE `sales` AUTO_INCREMENT=100;
       ALTER TABLE `sales_list` AUTO_INCREMENT=100;
 

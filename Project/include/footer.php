@@ -1,4 +1,3 @@
-<html>
 <footer class=footer>    
 <div class="footer-bottom">
     <div class="footer-choose"> 
@@ -9,4 +8,3 @@
     <p> &copy; People Health Pharmacy (PHP) Inc. | Designed by SWE20001 Lab 1 - Group 3</p>
 </div>
 </footer>
-</html>

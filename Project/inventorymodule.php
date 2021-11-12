@@ -18,7 +18,7 @@ include("include/header.php");
 <div>
 <form action="inventorymodule.php">
     <fieldset>
-        <legend>Filter Panel:</legend>
+        <legend>Filter Panel</legend>
         
         <label for="cat" >Search by:</label>
         <select id="cat" name="cat">
@@ -66,6 +66,8 @@ include("include/header.php");
 </div>
 </aside>
 
+<section class="inventory_section">
+<h2>Inventory Table</h2>
 <?php 
 include "conn.php";
 
@@ -479,6 +481,7 @@ else
     }
 }
 ?>
+</section>
 <?php include("include/footer.php");?>
 <script src="main.js"></script>
 </body>

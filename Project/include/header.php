@@ -26,13 +26,13 @@
 	<header>
 		<div class="navigationbar">
 			<nav>
-				<a href="index.php">People Health Pharmacy</a>
+				<a id="logo" href="index.php">People Health Pharmacy</a>
 				<div class="link">
-				<a href="salesmodule.php">Sales</a>
-				<a href="dashboard.php">Dashboard</a>
-				<a href="inventorymodule.php">Inventory</a>
-				<a href="analysismodule.php">Analysis</a>
-				<a href="logout_process.php">Logout</a>
+          <a href="salesmodule.php">Sales</a>
+          <a href="dashboard.php">Dashboard</a>
+          <a href="inventorymodule.php">Inventory</a>
+          <a href="analysismodule.php">Analysis</a>
+          <a href="logout_process.php">Logout</a>
 				</div>
 			</nav>
 		</div>

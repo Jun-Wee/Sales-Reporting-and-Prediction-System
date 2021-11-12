@@ -50,7 +50,7 @@ if(isset($_POST['update']))
 
 <?php include("include/header.php");?>
 <body>
-    <section>
+    <section class="edit_sales_container">
         <h2>Edit Sales</h2>
         
         <form method="POST" id="edit_form">
