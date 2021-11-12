@@ -93,15 +93,8 @@ else
 
     if($cat == "name")
     {
-        $pname = $_GET['pname'];
-        $product_order = "ASC";
+        $pname = $_GET['pname'];      
 
-        if(isset($_GET['product_order']))
-        {
-            $product_order = $_GET['product_order'];
-        }
-
-        // if search selection is name
         if($pname == "")
         {
             // if no product name is keyed in
@@ -118,8 +111,10 @@ else
             echo "</table>";
             echo "</div>";
         }
-        else 
+        elseif (isset($_GET['product_order']))
         {
+            $product_order = $_GET['product_order'];
+
             // if there is product name
             $query = mysqli_query($conn, "SELECT * 
                                             FROM (product INNER JOIN category
@@ -128,10 +123,45 @@ else
                                             ON product.product_id=inventory.product_id)
                                             WHERE product.product_name LIKE'%$pname%'
                                             ORDER BY product.product_name $product_order;
-                                            ");
+                                ");
 
-            // $data = mysqli_fetch_array($query);
+            echo "<div>";
+            echo "<table style='border:2;\'>";
+            echo "<tr>";
+            echo "<th>Category</th>";
+            echo "<th>Product</th>";
+            echo "<th>Quantity</th>";
+            echo "<th>Per unit price</th>";
+            echo "<th colspan='2'>Action</th>";
+            echo "</tr>";
 
+            while ($data = mysqli_fetch_array($query)) 
+            {         
+            echo "<tr>";
+            echo "<td>$data[5]</td>";
+            echo "<td>$data[1]</td>";
+            echo "<td>$data[7]</td>";
+            echo "<td>$data[3]</td>";
+            echo "<td><a href='' name=''>Edit</a></td>";
+            echo "</tr>";
+            }
+
+            echo "</table>";
+            echo "</div>";
+        }
+        elseif (isset($_GET['price_order']))
+        {
+            $price_order = $_GET['price_order'];
+
+            $query = mysqli_query($conn, "SELECT * 
+                                        FROM (product INNER JOIN category
+                                        ON product.category_id=category.category_id
+                                        INNER JOIN inventory
+                                        ON product.product_id=inventory.product_id)
+                                        WHERE product.product_name LIKE'%$pname%'
+                                        ORDER BY product.price $price_order;
+                                        ");
+            
             echo "<div>";
             echo "<table style='border:2;\'>";
             echo "<tr>";
@@ -156,6 +186,40 @@ else
             echo "</table>";
             echo "</div>";
         }
+        else
+        {
+            $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            WHERE product.product_name LIKE'%$pname%';
+                                            ");
+                
+                echo "<div>";
+                echo "<table style='border:2;\'>";
+                echo "<tr>";
+                echo "<th>Category</th>";
+                echo "<th>Product</th>";
+                echo "<th>Quantity</th>";
+                echo "<th>Per unit price</th>";
+                echo "<th colspan='2'>Action</th>";
+                echo "</tr>";
+
+                while ($data = mysqli_fetch_array($query)) 
+                {         
+                    echo "<tr>";
+                    echo "<td>$data[5]</td>";
+                    echo "<td>$data[1]</td>";
+                    echo "<td>$data[7]</td>";
+                    echo "<td>$data[3]</td>";
+                    echo "<td><a href='' name=''>Edit</a></td>";
+                    echo "</tr>";
+                }
+
+                echo "</table>";
+                echo "</div>";
+        }   
     }
 
     if($cat == "category")
@@ -186,9 +250,8 @@ else
             if(isset($_GET['product_order']))
             {
                 $product_order = $_GET['product_order'];
-            }
 
-            $query = mysqli_query($conn, "SELECT * 
+                $query = mysqli_query($conn, "SELECT * 
                                             FROM (product INNER JOIN category
                                             ON product.category_id=category.category_id
                                             INNER JOIN inventory
@@ -219,20 +282,92 @@ else
 
             echo "</table>";
             echo "</div>";
+            }
+            elseif(isset($_GET['price_order']))
+            {
+                $price_order = $_GET['price_order'];
+
+                $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            ORDER BY product.price $price_order;
+                                            ");
+                
+                echo "<div>";
+                echo "<table style='border:2;\'>";
+                echo "<tr>";
+                echo "<th>Category</th>";
+                echo "<th>Product</th>";
+                echo "<th>Quantity</th>";
+                echo "<th>Per unit price</th>";
+                echo "<th colspan='2'>Action</th>";
+                echo "</tr>";
+
+                while ($data = mysqli_fetch_array($query)) 
+                {         
+                    echo "<tr>";
+                    echo "<td>$data[5]</td>";
+                    echo "<td>$data[1]</td>";
+                    echo "<td>$data[7]</td>";
+                    echo "<td>$data[3]</td>";
+                    echo "<td><a href='' name=''>Edit</a></td>";
+                    echo "</tr>";
+                }
+
+                echo "</table>";
+                echo "</div>";
+            }
+            else 
+            {
+                $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            ORDER BY product.product_name $product_order;
+                                            ");
+                
+                echo "<div>";
+                echo "<table style='border:2;\'>";
+                echo "<tr>";
+                echo "<th>Category</th>";
+                echo "<th>Product</th>";
+                echo "<th>Quantity</th>";
+                echo "<th>Per unit price</th>";
+                echo "<th colspan='2'>Action</th>";
+                echo "</tr>";
+
+                while ($data = mysqli_fetch_array($query)) 
+                {         
+                    echo "<tr>";
+                    echo "<td>$data[5]</td>";
+                    echo "<td>$data[1]</td>";
+                    echo "<td>$data[7]</td>";
+                    echo "<td>$data[3]</td>";
+                    echo "<td><a href='' name=''>Edit</a></td>";
+                    echo "</tr>";
+                }
+
+                echo "</table>";
+                echo "</div>";
+            }
+
+            
         }
         else
         {
             // if category is selected
             $name = $_GET['name'];
             $product_order = "ASC";
+            $price_order = "";
 
             if(isset($_GET['product_order']))
             {
                 $product_order = $_GET['product_order'];
-            }
 
-
-            $query = mysqli_query($conn, "SELECT * 
+                $query = mysqli_query($conn, "SELECT * 
                                             FROM (product INNER JOIN category
                                             ON product.category_id=category.category_id
                                             INNER JOIN inventory
@@ -240,30 +375,105 @@ else
                                             WHERE category.category_name='$name'
                                             ORDER BY product.product_name $product_order;
                                             ");
-
-            echo "<div>";
-            echo "<table style='border:2;\'>";
-            echo "<tr>";
-            echo "<th>Category</th>";
-            echo "<th>Product</th>";
-            echo "<th>Quantity</th>";
-            echo "<th>Per unit price</th>";
-            echo "<th colspan='2'>Action</th>";
-            echo "</tr>";
-
-            while ($data = mysqli_fetch_array($query)) 
-            {         
+                
+                echo "<div>";
+                echo "<table style='border:2;\'>";
                 echo "<tr>";
-                echo "<td>$data[5]</td>";
-                echo "<td>$data[1]</td>";
-                echo "<td>$data[7]</td>";
-                echo "<td>$data[3]</td>";
-                echo "<td><a href='' name=''>Edit</a></td>";
+                echo "<th>Category</th>";
+                echo "<th>Product</th>";
+                echo "<th>Quantity</th>";
+                echo "<th>Per unit price</th>";
+                echo "<th colspan='2'>Action</th>";
                 echo "</tr>";
+
+                while ($data = mysqli_fetch_array($query)) 
+                {         
+                    echo "<tr>";
+                    echo "<td>$data[5]</td>";
+                    echo "<td>$data[1]</td>";
+                    echo "<td>$data[7]</td>";
+                    echo "<td>$data[3]</td>";
+                    echo "<td><a href='' name=''>Edit</a></td>";
+                    echo "</tr>";
+                }
+
+                echo "</table>";
+                echo "</div>";
+            }
+            elseif(isset($_GET['price_order']))
+            {
+                $price_order = $_GET['price_order'];
+
+                $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            WHERE category.category_name='$name'
+                                            ORDER BY product.price $price_order;
+                                            ");
+                
+                echo "<div>";
+                echo "<table style='border:2;\'>";
+                echo "<tr>";
+                echo "<th>Category</th>";
+                echo "<th>Product</th>";
+                echo "<th>Quantity</th>";
+                echo "<th>Per unit price</th>";
+                echo "<th colspan='2'>Action</th>";
+                echo "</tr>";
+
+                while ($data = mysqli_fetch_array($query)) 
+                {         
+                    echo "<tr>";
+                    echo "<td>$data[5]</td>";
+                    echo "<td>$data[1]</td>";
+                    echo "<td>$data[7]</td>";
+                    echo "<td>$data[3]</td>";
+                    echo "<td><a href='' name=''>Edit</a></td>";
+                    echo "</tr>";
+                }
+
+                echo "</table>";
+                echo "</div>";
+            }
+            else 
+            {
+                $query = mysqli_query($conn, "SELECT * 
+                                            FROM (product INNER JOIN category
+                                            ON product.category_id=category.category_id
+                                            INNER JOIN inventory
+                                            ON product.product_id=inventory.product_id)
+                                            WHERE category.category_name='$name'
+                                            ORDER BY product.product_name $product_order;
+                                            ");
+                
+                echo "<div>";
+                echo "<table style='border:2;\'>";
+                echo "<tr>";
+                echo "<th>Category</th>";
+                echo "<th>Product</th>";
+                echo "<th>Quantity</th>";
+                echo "<th>Per unit price</th>";
+                echo "<th colspan='2'>Action</th>";
+                echo "</tr>";
+
+                while ($data = mysqli_fetch_array($query)) 
+                {         
+                    echo "<tr>";
+                    echo "<td>$data[5]</td>";
+                    echo "<td>$data[1]</td>";
+                    echo "<td>$data[7]</td>";
+                    echo "<td>$data[3]</td>";
+                    echo "<td><a href='' name=''>Edit</a></td>";
+                    echo "</tr>";
+                }
+
+                echo "</table>";
+                echo "</div>";
             }
 
-            echo "</table>";
-            echo "</div>";
+            
         }
         
     }
