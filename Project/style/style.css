@@ -390,15 +390,7 @@ body#dashboard{
 #product_chart, #category_chart{
   height: calc(100vh - 4rem);
   width:100vw;
-  /* margin-bottom: 3rem; */
-  /* display: none; */
 }
-
-#product_chart{
-  /* background-color: burlywood; */
-}
-
-
 
 .chart_container{
   width: 100vw; 
