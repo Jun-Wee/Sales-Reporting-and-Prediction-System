@@ -42,7 +42,7 @@
             <div class="chart-container" style="position: relative; height:80vh; width:70vw; ">
                 <canvas id="myChart2" width="500" height="200"></canvas>
                 <select style="margin-top:1rem;" name="select2" id="select2">
-                    <option value="" disabled hidden selected>Select Product</option>
+                    <option value="" disabled hidden selected>Select Category</option>
                     <?php
                         $conn = @mysqli_connect("localhost", "root", "", "phpsreps");
                         $query = "SELECT category_id, category_name FROM category";
