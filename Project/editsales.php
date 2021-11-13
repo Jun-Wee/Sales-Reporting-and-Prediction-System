@@ -3,33 +3,62 @@ include "conn.php";
 
 $id = $_GET['id'];
 
-$query = mysqli_query($conn, "SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`,`sales_list`.`quantity`, `product`.`price`, `sales_list`.`quantity`*`product`.`price` AS `total`, `sales`.`date` 
+$query = "SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`,`sales_list`.`quantity`, `product`.`price`, `sales_list`.`quantity`*`product`.`price` AS `total`, `sales`.`date` 
 FROM (((`sales_list`
 INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
 INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
-INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) WHERE `sales`.`sales_id`='$id'");
+INNER JOIN `category` on `product`.`category_id`=`category`.`category_id`) WHERE `sales`.`sales_id`='$id'";
 
-$data = mysqli_fetch_array($query);
+$result = @mysqli_query($conn, $query);
+
+$data = mysqli_fetch_array($result);
 
 if(isset($_POST['update']))
 {
-    $sid = $_POST['sid'];
     $product = $_POST['cat'];
     $qty = $_POST['quantity'];
-    $total = $_POST['total'];
     $date = $_POST['date'];
 
     $product_data = explode(",", $product);
     $category_id = $product_data[0];
     $product_id = $product_data[1];
+    
+    $query = "SELECT * FROM sales_list WHERE product_id = '$product_id'";
+    $result1 = @mysqli_query($conn, $query);
+    $data1 = @mysqli_fetch_assoc($result1);
+    $previous_qty = (int)$data1['quantity'];
+    echo "Previous qty: ".$previous_qty;
 
     $edit = mysqli_query($conn, "UPDATE `sales` SET `date`='$date' WHERE `sales_id`='$id'");
     $edit2 = mysqli_query($conn, "UPDATE `sales_list` SET `product_id`='$product_id', `quantity`='$qty' WHERE `sales_id` = $id;");
+
+    $query = "SELECT * FROM sales_list WHERE product_id = '$product_id'";
+    $result1 = @mysqli_query($conn, $query);
+    $data1 = @mysqli_fetch_assoc($result1);
+    $updated_qty = (int)$data1['quantity'];
+    echo "<br>Updated qty: ".$updated_qty;
+    
+    $change = abs($updated_qty - $previous_qty);
+    echo "<br>Change ".$change;
+
+    $query = "SELECT * FROM inventory WHERE product_id = '$product_id'";
+    $result1 = @mysqli_query($conn, $query);
+    $inv_data = @mysqli_fetch_assoc($result1);
+    $stock = $inv_data['stock'];
+
+    if($previous_qty > $updated_qty){
+        $stock = $stock + $change;
+    }else{
+        $stock = $stock - $change;
+    }
+
+    $query = "UPDATE inventory SET stock = '$stock' WHERE product_id = '$product_id'";
+    @mysqli_query($conn, $query);
+
     if($edit && $edit2)
     {
         mysqli_close($conn);
         header("location:salesmodule.php");
-        exit;
     }
     else
     {
