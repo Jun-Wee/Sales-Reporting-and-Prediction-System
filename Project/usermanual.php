@@ -7,38 +7,42 @@
 
   <meta name="author" content="" />
 </head>
-<body class = "dashboard">
+<body class = "index_container">
 <?php include_once "include/header.php"; ?>
-<h1 class = "para1">
-    User Manual
-</h1>
-<p class = "para2">
-How to use Sales Module?
-<ol class = "usertable">
-  <li>Sales page will display the sales record</li>
-  <li>Add sales table allow to add any missing record</li>
-  <li>Button for edit will allow to make changes if there is an error form the record</li>
-  <li>Beware of the delete button, once it clicked the specify record will permanently remove from the database</li>
-</ol>
-</p>
-<p class = "para2">
-How to use Inventory Module?
-<ol class = "usertable">
-  <li>The table will show the product details</li>
-  <li>At right side, the table allow to find the category of the product by using the dropdown menu</li>
-</ol>
-</p>
-<p class = "para2">
-How to use Analysis Module?
-<ol class = "usertable">
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-</ol>
-</p>
-<?php include("include/footer2.php");?>
+  <h1 class = "para1">
+      User Manual
+  </h1>
+  <p class = "para2">
+  How to use Sales Module?
+    <ol class = "usertable">
+      <li>Sales page will display the sales record</li>
+      <li>Add sales table allow to add any missing record</li>
+      <li>Button for edit will allow to make changes if there is an error form the record</li>
+      <li>Beware of the delete button, once it clicked the specify record will permanently remove from the database</li>
+    </ol>
+  </p>
+
+  <p class = "para2">
+  How to use Inventory Module?
+    <ol class = "usertable">
+      <li>The table will show the product details</li>
+      <li>At right side, the table allow to find the category of the product by using the dropdown menu</li>
+    </ol>
+  </p>
+
+  <p class = "para2">
+  How to use Analysis Module?
+    <ol class = "usertable">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </p>
+
+
+<?php include("include/footer.php");?>
 </body>
 </html>
 
