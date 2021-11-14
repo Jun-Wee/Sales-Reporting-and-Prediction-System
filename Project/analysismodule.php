@@ -32,6 +32,8 @@
                         }
                     ?>
                 </select>
+                <br><br>
+                <button class ="button1" onclick="window.print()">Print this page</button>
             </div>  
         </div>
 
@@ -56,6 +58,8 @@
                         }
                     ?>
                 </select>
+                <br><br>
+                <button class ="button1" onclick="window.print()">Print this page</button>
             </div>  
         </div>
 
