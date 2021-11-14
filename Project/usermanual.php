@@ -15,10 +15,10 @@
   <p class = "para2">
   How to use Sales Module?
     <ol class = "usertable">
-      <li>Sales page will display the sales record</li>
-      <li>Add sales table allow to add any missing record</li>
-      <li>Button for edit will allow to make changes if there is an error form the record</li>
-      <li>Beware of the delete button, once it clicked the specify record will permanently remove from the database</li>
+      <li>Sales table will display the sales record</li>
+      <li>Add sales section is to add new record</li>
+      <li>Edit button allows user to make changes if there is an error from the record</li>
+      <li>Beware of the delete button, once it is clicked the specific record will permanently remove from the database</li>
     </ol>
   </p>
 
@@ -26,17 +26,19 @@
   How to use Inventory Module?
     <ol class = "usertable">
       <li>The table will show the product details</li>
-      <li>At right side, the table allow to find the category of the product by using the dropdown menu</li>
+      <li>At right side, the filter panel allows user to search by product name or category by using the dropdown menu</li>
+      <li>After clicking Submit button, the relevant products or category will show in the inventory table</li>
+      <li>For the edit button, user can update the quantity and per unit price of the product</li>
     </ol>
   </p>
 
   <p class = "para2">
   How to use Analysis Module?
     <ol class = "usertable">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>Analysis Module shows the charts of each product and category</li>
+      <li>User can select the product or category they want to see</li>
+      <li>"Print this page" button allows user to print the analysis module</li>
+      <li>The download button generates a CSV file of total sales</li>
       <li></li>
     </ol>
   </p>
