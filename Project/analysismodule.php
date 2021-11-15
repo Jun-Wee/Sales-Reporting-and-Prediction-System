@@ -16,7 +16,6 @@
     include ('conn.php');
     
     // creating the folders to store the csv files
-
     $sales_folder = "./sales_records";
     if(!file_exists($sales_folder)){
         mkdir($sales_folder);
@@ -109,15 +108,12 @@
 
     $query = "SELECT monthname(sales.date) AS month, product.product_name, SUM(sales_list.quantity) AS total FROM ((sales JOIN sales_list ON sales.sales_id = sales_list.sales_id) JOIN product ON sales_list.product_id = product.product_id) WHERE product.product_id = '$item' GROUP BY monthname(sales.date) ORDER BY  month(sales.date)";
     $result = $conn->query($query) or die("Unable to execute query");
-    $num_rows = @mysqli_num_rows($result);
+    $num_rows = mysqli_num_rows($result);
     $rows = $result->fetch_array();
     $total = array();
     $months = array();
 
-    $temp_months = array();
     $temp_total = array();
-
-    
 
     if($num_rows < 1){
         $query = "SELECT * FROM product WHERE product_id = '$item'";
@@ -136,36 +132,29 @@
 
     $index = 0;
     foreach($m as $j){
-        // echo $j."<br>";
-        if(sizeof($months) > 0){
 
+        if(sizeof($months) > 0){
             if($j == $months[$index]){
-                // echo $j." ".$total[$index]."<br>";
-                array_push($temp_months, $j);
                 array_push($temp_total, $total[$index]);
+
                 if($index < sizeof($months)-1){
                     $index++;
                 }
+
             }else{
-                // echo $j." 0<br>";
-                array_push($temp_months, $j);
                 array_push($temp_total, 0);
             }
         }else{
-            array_push($temp_months, $j);
             array_push($temp_total, 0);
         }
     }
 
     $working_data = array(
-        $temp_months,
+        $m,
         $temp_total
     );
 
     if(isset($_POST['product_csv'])){
-
-
-
         $filename = $product_folder.'/'.$product_name.'_monthly_sales.csv';
         $f = fopen($filename, 'w') ;
 
@@ -174,26 +163,21 @@
         }
 
         fclose($f);
-     
     }
-
-
-    // echo "Involved months: ".sizeof($months);
-    // echo "<br>";
-    // echo "All months: ".sizeof($temp_months);
-    // echo "<br>";
-    // echo "Size of total: ".sizeof($temp_total);
     ?>
 
     <script>
+        // selecting the select select input
         const select  = document.getElementById("select");
+
+        // add change listener to the select input
         select.addEventListener("change", function(){
             window.location.href = "analysismodule.php?item=" + select.value + "&category=1#product_chart";
         })
+
         const name = <?php echo json_encode($product_name);?>;
         const total = <?php echo json_encode($temp_total);?>;
-        const months = <?php echo json_encode($temp_months);?>;
-        
+        const months = <?php echo json_encode($m);?>;
         const ctx = document.getElementById('myChart').getContext('2d');
 
         const myChart = new Chart(ctx, {
@@ -243,7 +227,6 @@
                 }
             }
         });
-
     </script>
 
     <?php
@@ -258,10 +241,8 @@
     $num_rows = mysqli_num_rows($result);
     $rows = $result->fetch_array();
     $total = array();
-
     $months = array();
 
-    $temp_months = array();
     $temp_total = array();
 
     if($num_rows < 1){
@@ -281,35 +262,27 @@
 
     $index = 0;
     foreach($m as $j){
-        // echo $j."<br>";
         if(sizeof($months) > 0){
-            
             if($j == $months[$index]){
-                // echo $j." ".$total[$index]."<br>";
-                array_push($temp_months, $j);
                 array_push($temp_total, $total[$index]);
+
                 if($index < sizeof($months)-1){
                     $index++;
                 }
             }else{
-                // echo $j." 0<br>";
-                array_push($temp_months, $j);
                 array_push($temp_total, 0);
             }
-
         }else{
-            array_push($temp_months, $j);
             array_push($temp_total, 0);
         }
     }
 
     $working_data1 = array(
-        $temp_months,
+        $m,
         $temp_total
     );
 
     if(isset($_POST['category_csv'])){
-
 
         $filename = $category_folder.'/'.$category_name.'_monthly_sales.csv';
         $f = fopen($filename, 'w') ;
@@ -319,22 +292,21 @@
         }
 
         fclose($f);
-     
     }
-
-    // echo "Involved months: ".sizeof($months);
-    // echo "<br>";
-    // echo "All months: ".sizeof($temp_months);
     ?>
+
     <script>
+        // selecting the select select input
         const select2  = document.getElementById("select2");
 
+        // add change listener to the select input
         select2.addEventListener("change", function(){
             window.location.href = "analysismodule.php?item=1&category=" + select2.value + "#category_chart";
         })
+
         const category_name = <?php echo json_encode($category_name);?>;
         const category_total = <?php echo json_encode($temp_total);?>;
-        const category_months = <?php echo json_encode($temp_months);?>;
+        const category_months = <?php echo json_encode($m);?>;
         const ctx2 = document.getElementById('myChart2').getContext('2d');
 
         const myChart2 = new Chart(ctx2, {
@@ -388,50 +360,47 @@
 
     <section id="sales_table">
         <div>
-
-            
             <h2>Sales table</h2>
             <div>
                 <table>
-                <tr>
-                <th>Sales ID</th>
-                <th>Category</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Total</th>
-                <th>Date</th>
-                </tr>
-                <?php
-                $records = mysqli_query($conn, "SELECT sales.sales_id, category.category_name, product.product_name, sales_list.quantity, product.price, sales_list.quantity * product.price AS total, sales.date
-                FROM (((sales_list
-                INNER JOIN sales ON sales_list.sales_id=sales.sales_id)
-                INNER JOIN product ON sales_list.product_id=product.product_id)
-                INNER JOIN category on product.category_id=category.category_id) ORDER BY sales_id;"); // fetch data from database
+                    <tr>
+                        <th>Sales ID</th>
+                        <th>Category</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                        <th>Date</th>
+                    </tr>
+
+                    <?php
+                    $records = mysqli_query($conn, "SELECT sales.sales_id, category.category_name, product.product_name, sales_list.quantity, product.price, sales_list.quantity * product.price AS total, sales.date
+                    FROM (((sales_list
+                    INNER JOIN sales ON sales_list.sales_id=sales.sales_id)
+                    INNER JOIN product ON sales_list.product_id=product.product_id)
+                    INNER JOIN category on product.category_id=category.category_id) ORDER BY sales_id;"); // fetch data from database
                 
-                if($records){
-                while($data = mysqli_fetch_array($records))
-                {
-                ?>
-                <tr>
-                <td><?php echo $data['sales_id']; ?></td>
-                <td><?php echo $data['category_name']; ?></td>
-                <td><?php echo $data['product_name']; ?></td>    
-                <td><?php echo $data['quantity']; ?></td>    
-                <td><?php echo $data['price']; ?></td>    
-                <td><?php echo $data['total']; ?></td>    
-                <td><?php echo $data['date']; ?></td>    
-                </tr>	
-                <?php
-                }
-                }
-                mysqli_close($conn);
-                ?>
+                    if($records){
+                        while($data = mysqli_fetch_array($records)){       
+                    ?>
+                        <tr>
+                            <td><?php echo $data['sales_id']; ?></td>
+                            <td><?php echo $data['category_name']; ?></td>
+                            <td><?php echo $data['product_name']; ?></td>    
+                            <td><?php echo $data['quantity']; ?></td>    
+                            <td><?php echo $data['price']; ?></td>    
+                            <td><?php echo $data['total']; ?></td>    
+                            <td><?php echo $data['date']; ?></td>    
+                        </tr>	
+                    <?php
+                        }
+                    }
+                    mysqli_close($conn);
+                    ?>
                 </table>
             </div>
         </div>
     </section>
-    <h1>hello</h1>
 
     <?php include("include/footer.php");?>
 </body>
