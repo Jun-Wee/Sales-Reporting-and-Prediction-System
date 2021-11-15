@@ -36,7 +36,7 @@ if(!mysqli_stmt_prepare($stmt, $query)){
       session_start();
       $_SESSION["login_status"] = true;
       $_SESSION["role"] = $row["role"];
-      header("Location:salesmodule.php"); //access granted
+      header("Location:dashboard.php"); //access granted
       exit();
     }
   }
