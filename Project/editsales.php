@@ -3,7 +3,7 @@ include "conn.php";
 
 $id = $_GET['id'];
 
-$query = "SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_name`,`sales_list`.`quantity`, `product`.`price`, `sales_list`.`quantity`*`product`.`price` AS `total`, `sales`.`date` 
+$query = "SELECT `sales`.`sales_id`, `category`.`category_name`, `product`.`product_id`, `product`.`product_name`,`sales_list`.`quantity`, `product`.`price`, `sales_list`.`quantity`*`product`.`price` AS `total`, `sales`.`date` 
 FROM (((`sales_list`
 INNER JOIN `sales` ON `sales_list`.`sales_id`=`sales`.`sales_id`)
 INNER JOIN `product` ON `sales_list`.`product_id`=`product`.`product_id`)
@@ -22,8 +22,9 @@ if(isset($_POST['update']))
     $product_data = explode(",", $product);
     $category_id = $product_data[0];
     $product_id = $product_data[1];
+    echo "Product ID: ".$product_id."<br>";
     
-    $query = "SELECT * FROM sales_list WHERE product_id = '$product_id'";
+    $query = "SELECT * FROM sales_list WHERE sales_id = '$id'";
     $result1 = @mysqli_query($conn, $query);
     $data1 = @mysqli_fetch_assoc($result1);
     $previous_qty = (int)$data1['quantity'];
@@ -39,7 +40,7 @@ if(isset($_POST['update']))
     echo "<br>Updated qty: ".$updated_qty;
     
     $change = abs($updated_qty - $previous_qty);
-    echo "<br>Change ".$change;
+    echo "<br>Change ".$change."<br>";
 
     $query = "SELECT * FROM inventory WHERE product_id = '$product_id'";
     $result1 = @mysqli_query($conn, $query);
@@ -53,7 +54,7 @@ if(isset($_POST['update']))
     }
 
     $query = "UPDATE inventory SET stock = '$stock' WHERE product_id = '$product_id'";
-    @mysqli_query($conn, $query);
+    @mysqli_query($conn, $query) or die('Not updated');
 
     if($edit && $edit2)
     {
@@ -95,24 +96,24 @@ if(isset($_POST['update']))
                     <label for="cat">Product: </label>
                     <select id="cat" name="cat">
                         <optgroup label="Health">
-                        <option value="1,1">Vitamins</option>
-                        <option value="1,2">First Aid</option>
-                        <option value="1,3">Face Masks & Gloves</option>
-                        <option value="1,4">Eye & Ear Care</option>
+                        <option value="1,1" <?php if($data['product_id'] == 1){echo "selected";}?>>Vitamins</option>
+                        <option value="1,2" <?php if($data['product_id'] == 2){echo "selected";}?>>First Aid</option>
+                        <option value="1,3" <?php if($data['product_id'] == 3){echo "selected";}?>>Face Masks & Gloves</option>
+                        <option value="1,4" <?php if($data['product_id'] == 4){echo "selected";}?>>Eye & Ear Care</option>
                         <optgroup label="Personal Care">
-                        <option value="2,5">Hand Wash & Sanitizer</option>
-                        <option value="2,6">Bath Care</option>
-                        <option value="2,7">Feminine Care</option>
-                        <option value="2,8">Oral Care</option>
+                        <option value="2,5" <?php if($data['product_id'] == 5){echo "selected";}?>>Hand Wash & Sanitizer</option>
+                        <option value="2,6" <?php if($data['product_id'] == 6){echo "selected";}?>>Bath Care</option>
+                        <option value="2,7" <?php if($data['product_id'] == 7){echo "selected";}?>>Feminine Care</option>
+                        <option value="2,8" <?php if($data['product_id'] == 8){echo "selected";}?>>Oral Care</option>
                         <optgroup label="Cosmetics">
-                        <option value="3,9">Cotton</option>
-                        <option value="3,10">Fragance</option>
-                        <option value="3,11">Face</option>
-                        <option value="3,12">Lips</option>
+                        <option value="3,9" <?php if($data['product_id'] == 9){echo "selected";}?>>Cotton</option>
+                        <option value="3,10" <?php if($data['product_id'] == 10){echo "selected";}?>>Fragance</option>
+                        <option value="3,11" <?php if($data['product_id'] == 11){echo "selected";}?>>Face</option>
+                        <option value="3,12" <?php if($data['product_id'] == 12){echo "selected";}?>>Lips</option>
                         <optgroup label="Baby Care">
-                        <option value="4,13">Baby Daipers</option>
-                        <option value="4,14">Baby Food</option>
-                        <option value="4,15">Baby Wipes</option>
+                        <option value="4,13" <?php if($data['product_id'] == 13){echo "selected";}?>>Baby Daipers</option>
+                        <option value="4,14" <?php if($data['product_id'] == 14){echo "selected";}?>>Baby Food</option>
+                        <option value="4,15" <?php if($data['product_id'] == 15){echo "selected";}?>>Baby Wipes</option>
                     </select>
                 </div>
         
