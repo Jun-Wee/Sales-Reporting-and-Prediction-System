@@ -10,27 +10,57 @@
 
 <body>
     <?php include("include/header.php");?>
+
+    
+    <?php
+    include ('conn.php');
+    
+    // creating the folders to store the csv files
+
+    $sales_folder = "./sales_records";
+    if(!file_exists($sales_folder)){
+        mkdir($sales_folder);
+    }
+
+    $category_folder = $sales_folder.'/Category';
+    if(!file_exists($category_folder)){
+        mkdir($category_folder);
+    }
+
+    $product_folder = $sales_folder.'/Product';
+    if(!file_exists($product_folder)){
+        mkdir($product_folder);
+    }
+    ?>
+
     <section id="product_chart">
         <div class="chart_container">
             <div class="chart-container" style="position: relative; height:80vh; width:70vw; ">
                 <canvas id="myChart" width="500" height="200"></canvas>
                 <select style="margin-top:1rem;" name="select" id="select">
                     <option value="" disabled hidden selected>Select Product</option>
+
                     <?php
-                        include ('conn.php');
-                        $query = "SELECT product_id, product_name FROM product";
-                        $result = $conn->query($query);
-                        $rows = $result->fetch_assoc();
-                        while($rows){
+                    $query = "SELECT product_id, product_name FROM product";
+                    $result = $conn->query($query);
+                    $rows = $result->fetch_assoc();
+                    while($rows){  
                     ?>
+                    
                     <option <?php if(isset($_GET['item'])){if($_GET['item'] == $rows['product_id']){ echo "selected";}}?> value="<?php echo $rows['product_id']?>"><?php echo $rows['product_name']?></option>
+                    
                     <?php
-                        $rows = $result->fetch_assoc();
-                        }
+                    $rows = $result->fetch_assoc();
+                    }
                     ?>
+                    
                 </select>
                 <br><br>
                 <button class ="button1" onclick="window.print()">Print this page</button>
+                <form class="csv_download_form" method="POST">
+                    <input class ="button1" type="submit" value="Generate CSV" name="product_csv">
+                </form>
+
             </div>  
         </div>
 
@@ -57,6 +87,9 @@
                 </select>
                 <br><br>
                 <button class ="button1" onclick="window.print()">Print this page</button>
+                <form class="csv_download_form" method="POST">
+                    <input class ="button1" type="submit" value="Generate CSV" name="category_csv">
+                </form>
             </div>  
         </div>
 
@@ -79,12 +112,12 @@
     $num_rows = @mysqli_num_rows($result);
     $rows = $result->fetch_array();
     $total = array();
-
     $months = array();
 
     $temp_months = array();
     $temp_total = array();
 
+    
 
     if($num_rows < 1){
         $query = "SELECT * FROM product WHERE product_id = '$item'";
@@ -122,6 +155,26 @@
             array_push($temp_months, $j);
             array_push($temp_total, 0);
         }
+    }
+
+    $working_data = array(
+        $temp_months,
+        $temp_total
+    );
+
+    if(isset($_POST['product_csv'])){
+
+
+
+        $filename = $product_folder.'/'.$product_name.'_monthly_sales.csv';
+        $f = fopen($filename, 'w') ;
+
+        foreach ($working_data as $row) {
+            fputcsv($f, $row);   
+        }
+
+        fclose($f);
+     
     }
 
 
@@ -198,7 +251,6 @@
         $category = $_GET['category'];
     }else{
         $category = 1;
-        echo $category ;
     }
 
     $query = "SELECT monthname(sales.date) AS month, category.category_name, SUM(sales_list.quantity) AS total FROM (((sales JOIN sales_list ON sales.sales_id = sales_list.sales_id) JOIN product ON sales_list.product_id = product.product_id) JOIN category ON product.category_id = category.category_id) WHERE category.category_id = '$category' GROUP BY month ORDER BY month(sales.date)";
@@ -249,7 +301,25 @@
             array_push($temp_months, $j);
             array_push($temp_total, 0);
         }
+    }
 
+    $working_data1 = array(
+        $temp_months,
+        $temp_total
+    );
+
+    if(isset($_POST['category_csv'])){
+
+
+        $filename = $category_folder.'/'.$category_name.'_monthly_sales.csv';
+        $f = fopen($filename, 'w') ;
+
+        foreach ($working_data1 as $row) {
+            fputcsv($f, $row);   
+        }
+
+        fclose($f);
+     
     }
 
     // echo "Involved months: ".sizeof($months);
