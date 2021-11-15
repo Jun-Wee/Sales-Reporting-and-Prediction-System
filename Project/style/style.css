@@ -387,7 +387,7 @@ body#dashboard{
 }
 
 /* analysis module */
-#product_chart, #category_chart{
+#product_chart, #category_chart, #sales_table{
   height: calc(100vh - 4rem);
   width:100vw;
 }
@@ -413,4 +413,17 @@ body#dashboard{
 
 .button1:hover{
   background-color: #3e8e41
+
+}
+
+#sales_table{
+  padding: 2rem;
+  /* background-color: antiquewhite; */
+  display: flex;
+  justify-content: center;
+  
+}
+
+#sales_table h2{
+  margin-bottom: 1rem;
 }
