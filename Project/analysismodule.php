@@ -16,7 +16,7 @@
     include ('conn.php');
     
     // creating the folders to store the csv files
-    $sales_folder = "./sales_records";
+    $sales_folder = "../sales_records";
     if(!file_exists($sales_folder)){
         mkdir($sales_folder);
     }
