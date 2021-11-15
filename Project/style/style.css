@@ -427,3 +427,7 @@ body#dashboard{
 #sales_table h2{
   margin-bottom: 1rem;
 }
+
+.csv_download_form{
+  display: inline;
+}
