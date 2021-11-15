@@ -483,6 +483,6 @@ else
 ?>
 </section>
 <?php include("include/footer.php");?>
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
